@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import NameForm from './components/prompt/NameForm';
 import PropViewer from './components/PropViewer';
@@ -15,6 +15,8 @@ import Login from './components/secure/Login';
 import Logout from './components/secure/Logout';
 import People from './components/people/People';
 import PersonProfileContainer from './containers/PersonProfileContainer';
+import Unicorn from './components/unicorn/Unicorn';
+import Fade from './components/transition/Fade';
 
 const App = () => {
 
@@ -27,7 +29,10 @@ const App = () => {
                     <Switch>
                         <Route path="/" component={Home} exact />
                         <Route path="/prompt" component={NameForm} />
+                        <Route path='/unicorn' component={Unicorn} />
+                        <Redirect to="/unicorn" from="/pets" />
                         <Route path="/props" component={PropViewer} />
+                        <Route path="/transitions" component={Fade} />
                         <Route path="/color/:text/:color" component={SmartColorSwatch} />
 
                         <Route path="/color" render={() => {
@@ -35,7 +40,7 @@ const App = () => {
                         }} />
                         <Route path="/logging" component={LoggingHome} />
                         <Route path="/people/:id" component={PersonProfileContainer} />
-                        <Route path="/people" component={People} />                        
+                        <Route path="/people" component={People} />
                         <PrivateRoute path="/private" component={ProtectedHome} />
                         <Route path="/login" component={Login} />
                         <Route path="/logout" component={Logout} />
